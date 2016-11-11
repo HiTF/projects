@@ -8,12 +8,11 @@
 #include <string.h> 
  
 #define THREADS_COUNT 2
-#define TABLE_LIMIT 100
+#define TABLE_LIMIT 10
 #define QUANITY 10
 int l = 0;
 
 struct sembuf mybuf;
-char zer[]="00000000000000000000";
 typedef struct posuda {
 	char name[20]; 
 	int qua;  
@@ -31,10 +30,10 @@ void SemOp(int sem_num, int n)
 	mybuf.sem_num = sem_num;
 	mybuf.sem_op = n;
 	mybuf.sem_flg = 0;
-	if(semop(semid, &mybuf, 1) < 0) {
-		printf("Can\'t wait for condition\n");
-		exit(-1);
-	}
+	//if(semop(semid, &mybuf, 1) < 0) {
+		//printf("Can\'t wait for condition\n");
+		//exit(-1);
+	//}
 }
 
 int wait(int j){

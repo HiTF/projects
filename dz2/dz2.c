@@ -38,7 +38,7 @@ void SemOp(int sem_num, int n)
 	mybuf.sem_flg = 0;
 }
 
-int wait(int j){
+int waiting(int j){
 	mybuf.sem_num = j;
     mybuf.sem_flg = 0;
     return mybuf.sem_op;
@@ -77,7 +77,7 @@ int wait(int j){
 			sleep(k);
 			while(1){
 				if (TABLE_LIMIT > TABLE){
-					if (wait(0) != -1){
+					if (waiting(0) != -1){
 						SemOp(1, -1);
 						fseek(table, 0, SEEK_SET);
 						for(int e = 0; e < (b+1); e++){
@@ -129,7 +129,7 @@ void* wiping(void* dummy) {
 		if (TABLE < 100){
 			SemOp(0, 1);
 			}
-		if ((TABLE > 0)&&(wait(0) > -1)){
+		if ((TABLE > 0)&&(waiting(0) > -1)){
 			SemOp(0,-1);
 			fseek(table, b,SEEK_SET);
 			fscanf (table, "%s", str);
